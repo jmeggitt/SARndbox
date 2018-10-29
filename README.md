@@ -42,17 +42,16 @@ references to `~/src` in the following instructions need to be changed.
    adapt the makefile using a text editor. Add the following line to the begining of the `Makefile`.
    > VRUI_MAKEDIR := <Vrui install dir>/share/make
 
-4. Build the Augmented Reality Sandbox:
+4. Build the Augmented Reality Sandbox using the command:
    > make
 
 5. Install the Augmented Reality Sandbox in the selected target
-   location. To install:
-   > sudo make install
-   This will copy all executables into <INSTALLDIR>/bin, all
-   configuration files into <INSTALLDIR>/etc/SARndbox-<version>, all
-   resource files into <INSTALLDIR>/share/SARndbox-<version>, and all
+   location. To install run the command `sudo make install`
+   This will copy all executables into `<INSTALLDIR>/bin`, all
+   configuration files into `<INSTALLDIR>/etc/SARndbox-<version>`, all
+   resource files into `<INSTALLDIR>/share/SARndbox-<version>`, and all
    shader source codes into
-   <INSTALLDIR>/share/SARndbox-<version>/Shaders.
+   `<INSTALLDIR>/share/SARndbox-<version>/Shaders`.
 
  ## Use
 
@@ -63,8 +62,7 @@ and the projector projecting onto it. The setup procedure described
 below also uses several utilities from the Kinect 3D video capture
 project.
 
-Setup and Calibration
----------------------
+ ## Setup and Calibration
 
 Before the Augmented Reality Sandbox can be used, the hardware (physical
 sandbox, Kinect camera, and projector) has to be set up properly, and
@@ -73,20 +71,19 @@ to each other. While the sandbox can be run in "trial mode" with very
 little required setup, for the full effect the following steps have to
 be performed in order:
 
-1. (Optional) Calculate per-pixel depth correction coefficients for the
-   Kinect camera.
+1. *Optional* Calculate per-pixel depth correction coefficients for the
+   Kinect camera. (trial and error)
 
-2. (Optional) Internally calibrate the Kinect camera.
+2. *Optional* Internally calibrate the Kinect camera. (trial and error)
 
 3. Mount the Kinect camera above the sandbox so that it is looking
    straight down, and can see the entire sand surface. Use
-   RawKinectViewer from the Kinect 3D video capture project to line up
+   `RawKinectViewer` from the Kinect 3D video capture project to line up
    the depth camera while ignoring the color camera.
 
 4. Measure the base plane equation of the sand surface relative to the
    Kinect camera's internal coordinate system using RawKinectViewer's
-   plane extraction tool. (See "Using Vrui Applications" in the Vrui
-   HTML documentation on how to use RawKinectViewer, and particularly on
+   plane extraction tool. (See [Using Vrui Applications](http://idav.ucdavis.edu/~okreylos/ResDev/Vrui/InstallationGuide.html) in the Vrui documentation on how to use `RawKinectViewer`, and particularly on
    how to create / destroy tools.)
 
 5. Measure the extents of the sand surface relative to the Kinect
@@ -106,8 +103,7 @@ be performed in order:
 
 8. Test the setup by running the Augmented Reality Sandbox application.
 
-Step 1: Per-pixel depth correction
-----------------------------------
+ #### Step 1: Per-pixel depth correction
 
 Kinect cameras have non-linear distortions in their depth measurements
 due to uncorrected lens distortions in the depth camera. The Kinect 3D
@@ -144,8 +140,7 @@ After all tie points have been collected:
    Kinect 3D video capture project's configuration directory, and print
    a status message to the terminal.
 
-Step 2: Internally calibrate the Kinect camera
-----------------------------------------------
+### Step 2: Internally calibrate the Kinect camera
 
 Individual Kinect cameras have slightly different internal layouts and
 slightly different optical properties, meaning that their internal
@@ -215,11 +210,9 @@ After all tie points have been collected:
    intrinsic parameter file in the Kinect 3D video capture project's
    configuration directory.
 
-This calibration step is illustrated in the following tutorial video:
-http://www.youtube.com/watch?v=Qo05LVxdlfo
+This calibration step is illustrated in the following [tutorial video](http://www.youtube.com/watch?v=Qo05LVxdlfo)
 
-Step 3: Mount the Kinect camera above the sandbox
--------------------------------------------------
+### Step 3: Mount the Kinect camera above the sandbox
 
 In theory, the Kinect camera can be aimed at the sand surface from any
 position and/or angle, but for best results, we recommend to position
@@ -228,12 +221,11 @@ that the depth camera's field-of-view exactly matches the extents of the
 sandbox. RawKinectViewer can be used to get real-time visual feedback
 while aligning the Kinect camera.
 
-Step 4: Measure the base plane equation of the sand surface
------------------------------------------------------------
+### Step 4: Measure the base plane equation of the sand surface
 
 Because the Kinect camera can be aimed at the sand surface arbitrarily,
-the Augmented Reality Sandbox needs to know the equation of the "base
-plane" corresponding to the average flattened sand surface, and the "up
+the Augmented Reality Sandbox needs to know the equation of the base
+plane corresponding to the average flattened sand surface, and the "up
 direction" defining elevation above or below that base plane.
 
 The base plane can be measured using RawKinectViewer and the "Extract
@@ -249,14 +241,14 @@ plane equation to the terminal: the equation in depth image space, and
 the equation in camera space. Of these, only the second is important.
 The tool prints the camera-space plane equation in the form
 
-x * (normal_x, normal_y, normal_z) = offset
+> x * (normal_x, normal_y, normal_z) = offset
 
 This equation has to be entered into the sandbox layout file, which is
 by default called BoxLayout.txt and contained in the Augmented Reality
 Sandbox's configuration directory. The format of this file is simple:
 the first line contains the sandbox's base plane equation in the form
 
-(normal_x, normal_y, normal_z), offset
+> (normal_x, normal_y, normal_z), offset
 
 The plane equation printed by the "Extract Planes" tool only needs to be
 modified slightly when pasting it into the sandbox layout file: the "x
@@ -275,11 +267,9 @@ shifted downwards by decreasing the offset value. The offset value is
 measured in cm; therefore, adding 10 to the original offset value will
 move sea level 10 cm upwards.
 
-This calibration step is illustrated in the following tutorial video:
-http://www.youtube.com/watch?v=9Lt4J_BErs0
+This calibration step is illustrated in the following [tutorial video](http://www.youtube.com/watch?v=9Lt4J_BErs0).
 
-Step 5: Measure the extents of the sand surface
------------------------------------------------
+### Step 5: Measure the extents of the sand surface
 
 The Augmented Reality Sandbox needs to know the lateral extents of the
 visible sand surface with respect to the base plane. These are defined
@@ -300,8 +290,7 @@ space, and print the resulting 3D position to the console. Simply paste
 the four corner positions, in the order mentioned above, into the
 sandbox layout file.
 
-Step 6: Mount the projector above the sandbox
----------------------------------------------
+### Step 6: Mount the projector above the sandbox
 
 Just like with the Kinect camera, the Augmented Reality Sandbox is
 capable of dealing with arbitrary projector alignments. As long as there
@@ -353,8 +342,7 @@ check the projector's specification for its native resolution, and
 ensure that the graphics card uses that resolution when the projector is
 connected.
 
-Step 7: Calculate the projector calibration matrix
---------------------------------------------------
+### Step 7: Calculate the projector calibration matrix
 
 The most important step to create a true augmented reality display is to
 calibrate the Kinect camera capturing the sand surface and the projector
@@ -386,8 +374,6 @@ that was collected in a previous calibration step. It is important to
 place the disk at a variety of elevations above and ideally below the
 base surface to collect a full 3D calibration matrix. If all tie points
 are in the same plane, the calibration procedure will fail.
-
-The exact procedure is as follows:
 
 1. Start CalibrateProjector and wait for it to collect a background
    frame. Background capture is active while the screen is red. It is
@@ -455,14 +441,10 @@ The exact procedure is as follows:
    your hands, and ensure that the red crosshairs intersect in the
    target's center.
 
-This calibration step is illustrated in the following tutorial video:
-http://www.youtube.com/watch?v=V_-Qn7oEsn4
-This older video:
-http://www.youtube.com/watch?v=vXkA9gUoSAc
-shows the previous calibration procedure, and does no longer apply.
+This calibration step is illustrated in the following [tutorial video](http://www.youtube.com/watch?v=V_-Qn7oEsn4) or the [older video](http://www.youtube.com/watch?v=vXkA9gUoSAc)
+shows the previous calibration procedure, and no longer applies.
 
-Step 8: Run the Augmented Reality Sandbox
------------------------------------------
+### Step 8: Run the Augmented Reality Sandbox
 
 At this point, calibration is complete. It is now possible to run the
 main Augmented Reality Sandbox application from inside the source code
@@ -470,7 +452,7 @@ directory (or the -- optionally chosen -- installation directory):
 
 > ./bin/SARndbox -fpv
 
-The -fpv option tells the AR Sandbox to use the projector calibration
+The `-fpv` option tells the AR Sandbox to use the projector calibration
 matrix created in step 7.
 
 It is very important to run the application in full-screen mode on the
@@ -494,8 +476,7 @@ desired. Run SARndbox -h to see the full list of options and their
 default values, or refer to external documentation on the project's web
 site.
 
-Note on water simulation
-------------------------
+#### Note on water simulation
 
 Without the real-time water simulation, the Augmented Reality Sandbox
 has very reasonable hardware requirements. Any current PC with any
