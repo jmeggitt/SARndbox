@@ -1,10 +1,9 @@
-========================================================================
-README for Augmented Reality Sandbox (SARndbox) version 2.3
-Copyright (c) 2012-2016 Oliver Kreylos
-========================================================================
+ # SARndbox
 
-Overview
-========
+version 2.3
+Copyright (c) 2012-2016 Oliver Kreylos
+
+ ## Overview
 
 The Augmented Reality Sandbox is an augmented reality application
 scanning a sand surface using a Kinect 3D camera, and projecting a real-
@@ -12,44 +11,36 @@ time updated topography map with topographic contour lines, hillshading,
 and an optional real-time water flow simulation back onto the sand
 surface using a calibrated projector.
 
-Requirements
-============
+ ### Requirements
+ - Vrui version 4.2 or newer
+ - Kinect 3D Video Capture Project version 3.2 or newer
 
-The Augmented Reality Sandbox requires Vrui version 4.2 build 001 or
-newer, and the Kinect 3D Video Capture Project version 3.2 or newer.
-
-Installation Guide
-==================
+## Installation Guide
 
 It is recommended to download or move the source packages for Vrui, the
 Kinect 3D Video Capture Project, and the Augmented Reality Sandbox into
 a src directory underneath the user's home directory. Otherwise,
-references to ~/src in the following instructions need to be changed.
+references to `~/src` in the following instructions need to be changed.
 
-0. Install Vrui from ~/src/Vrui-<version>-<build> (see Vrui README file).
+ 1. Install Vrui from `~/src/Vrui-<version>-<build>`. See [Vrui README](http://idav.ucdavis.edu/~okreylos/ResDev/Vrui/InstallationGuide.html).
 
-0.5 Install the Kinect 3D Video Capture Project from
-    ~/src/Kinect-<version> (see the Kinect 3D Video Capture Project
-    README file).
+ 2. Install the Kinect 3D Video Capture Project from
+    `~/src/Kinect-<version>`. See the [Kinect 3D Video Capture Project
+    README](https://arsandbox.ucdavis.edu/technical-resources/downloads/kinect/).
 
-1. Change into ~/src directory and unpack the Augmented Reality Sandbox
-   tarball:
+1. Change into `~/src` directory and unzip the Augmented Reality Sandbox:
    > cd ~/src
    > tar xfz <download path>/SARndbox-<version>.tar.gz
-   - or -
+   or
    > tar xf <download path>/SARndbox-<version>.tar
 
 2. Change into the Augmented Reality Sandbox's base directory:
    > cd SARndbox-<version>
 
-3. If the Vrui version installed in step 0 was not 4.2, or Vrui's
-   installation directory was changed from the default of /usr/local,
-   adapt the makefile using a text editor. Change the value of
-   VRUI_MAKEDIR close to the beginning of the file as follows:
-   VRUI_MAKEDIR := <Vrui install dir>/share/make
-   Where <Vrui install dir> is the installation directory chosen in
-   step 0. Use $(HOME) to refer to the user's home directory instead
-   of ~.
+3. **If the Vrui version installed was not 4.2**, or Vrui's
+   installation directory was changed from the default of `/usr/local`,
+   adapt the makefile using a text editor. Add the following line to the begining of the `Makefile`.
+   > VRUI_MAKEDIR := <Vrui install dir>/share/make
 
 4. Build the Augmented Reality Sandbox:
    > make
@@ -63,8 +54,7 @@ references to ~/src in the following instructions need to be changed.
    shader source codes into
    <INSTALLDIR>/share/SARndbox-<version>/Shaders.
 
-Use
-===
+ ## Use
 
 The Augmented Reality Sandbox package contains the sandbox application
 itself, SARndbox, and a calibration utility to interactively measure a
